@@ -36,8 +36,8 @@ public class Solution implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date submissionTime;
     
-    @Column
-    private Language programmingLanguage;
+    @Column(name = "programminglanguage")
+    private Language language;
     
     @Column
     private String sourceCode;
@@ -98,12 +98,12 @@ public class Solution implements Serializable {
         this.submissionTime = submissionTime;
     }
 
-    public Language getProgrammingLanguage() {
-        return programmingLanguage;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setProgrammingLanguage(Language programmingLanguage) {
-        this.programmingLanguage = programmingLanguage;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public String getSourceCode() {
@@ -126,6 +126,11 @@ public class Solution implements Serializable {
         return new CompilationResult(compilationSuccess, compilationMessage);
     }
     
+    public void setCompilationResult(CompilationResult result) {
+        compilationSuccess = result.isSuccess();
+        compilationMessage = result.getMessage();
+    }
+    
     public boolean isCompilationSuccess() {
         return compilationSuccess;
     }
@@ -145,6 +150,13 @@ public class Solution implements Serializable {
     public ExecutionResult getExecutionResult() {
         return new ExecutionResult(executionTimeMs, executionAborted, 
                 executionOutput, executionExitCode);
+    }
+    
+    public void setExecutionResult(ExecutionResult result) {
+        executionTimeMs = result.getExecutionTimeMs();
+        executionAborted = result.isWasAborted();
+        executionOutput = result.getActualOutput();
+        executionExitCode = result.getExitCode();
     }
     
     public int getExecutionTimeMs() {

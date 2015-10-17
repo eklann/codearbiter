@@ -6,7 +6,8 @@ package se.eklann.codearbiter.executor;
  */
 public class JavaContainerBuilder implements ContainerBuilder {    
     @Override
-    public void BuildContainer(String executablePath, String containerPath) {
+    public void BuildContainer(String contextDirectory, String executableName, 
+            String containerName) {
         //TODO: Implement
         throw new UnsupportedOperationException();
     }

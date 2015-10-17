@@ -10,11 +10,11 @@ import se.eklann.codearbiter.model.IOPair;
 public class Executor {
     /**
      * Executes the given docker container with the specified IOPair 
-    * @param containerPath The container to run.
+    * @param containerName The container to run.
      * @param ioPair The test case to run.
      * @return The Execution result.
      */
-    public ExecutionResult Execute(String containerPath, IOPair ioPair) {
+    public static ExecutionResult Execute(String containerName, IOPair ioPair) {
         //TODO: Implement
         throw new UnsupportedOperationException();
     }
