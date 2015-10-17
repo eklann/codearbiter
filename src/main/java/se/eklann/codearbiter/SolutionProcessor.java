@@ -4,7 +4,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import se.eklann.codearbiter.compiler.CompilerFactory;
+import se.eklann.codearbiter.model.EvaluationStatus;
 import se.eklann.codearbiter.model.Solution;
 
 /**
@@ -12,7 +12,7 @@ import se.eklann.codearbiter.model.Solution;
  * @author eklann
  */
 public class SolutionProcessor implements Runnable {
-    private Queue<Solution> processingQueue;
+    private final Queue<Solution> processingQueue;
     
     private static SolutionProcessor instance = null;
     
@@ -29,6 +29,10 @@ public class SolutionProcessor implements Runnable {
         
         Thread processingThread = new Thread(this);
         processingThread.start();
+    }
+    
+    public void QueueSolution(Solution solution) {
+        processingQueue.add(solution);
     }
     
     @Override
@@ -49,18 +53,20 @@ public class SolutionProcessor implements Runnable {
     }
 
     private static void ProcessSolution(Solution solution) {
-        //Create the context
         SolutionContext context = new SolutionContext(solution);
         
         try {
-        //First compile
+            solution.setStatus(EvaluationStatus.Processing);
+
+            context.Compile();
             
-            compiler.Compile(solution.getSourceCode(), null);
+            if (solution.isCompilationSuccess()) {
+                context.Run();
+            }
+            
+            solution.setStatus(EvaluationStatus.Evaluated);
         } finally {
             context.Cleanup();
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
