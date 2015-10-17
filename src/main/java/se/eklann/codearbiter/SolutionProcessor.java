@@ -54,8 +54,7 @@ public class SolutionProcessor implements Runnable {
         
         try {
         //First compile
-            se.eklann.codearbiter.compiler.Compiler compiler = 
-                    CompilerFactory.GetCompiler(solution.getLanguage());
+            
             compiler.Compile(solution.getSourceCode(), null);
         } finally {
             context.Cleanup();
