@@ -34,10 +34,11 @@ public class SolutionContext {
         
         contextDirectory = Paths.get(".", solution.getId() + "").toString();
         
-        //TODO: Prefixes for these strings in config
-        executableFilename = "solution" + compiler.ExecutableExtension(); 
-        containerName = "arbiter/" + solution.getProblem().getId() + "/" + 
-                solution.getId();
+        executableFilename = Config.getValue("ExecutableFilename", "solution") 
+                + compiler.ExecutableExtension(); 
+        
+        containerName = Config.getValue("ContainerNamePrefix", "arbiter") + "/" 
+                + solution.getProblem().getId() + "/" + solution.getId();
     }
     
     public void Compile() {

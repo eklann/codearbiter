@@ -40,6 +40,9 @@ public class ExecutionResult implements Serializable {
     
     @Column
     private int exitCode;
+    
+    @Column
+    private int bonusScore;
 
     public ExecutionResult(Solution solution, IOPair ioPair) {
         this.solution = solution;
@@ -100,5 +103,13 @@ public class ExecutionResult implements Serializable {
 
     public void setExitCode(int exitCode) {
         this.exitCode = exitCode;
+    }
+
+    public int getBonusScore() {
+        return bonusScore;
+    }
+
+    public void setBonusScore(int bonusScore) {
+        this.bonusScore = bonusScore;
     }
 }

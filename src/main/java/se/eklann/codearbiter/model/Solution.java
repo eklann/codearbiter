@@ -53,6 +53,9 @@ public class Solution implements Serializable {
     @Column
     private String compilationMessage;
     
+    @Column
+    private int baseScore;
+    
     @OneToMany
     @JoinColumn(name = "solutionId")
     private List<ExecutionResult> executionResults;
@@ -132,6 +135,14 @@ public class Solution implements Serializable {
 
     public void setCompilationMessage(String compilationMessage) {
         this.compilationMessage = compilationMessage;
+    }
+
+    public int getBaseScore() {
+        return baseScore;
+    }
+
+    public void setBaseScore(int baseScore) {
+        this.baseScore = baseScore;
     }
 
     public List<ExecutionResult> getExecutionResults() {

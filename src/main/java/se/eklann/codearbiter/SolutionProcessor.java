@@ -42,7 +42,8 @@ public class SolutionProcessor implements Runnable {
             
             if (null == nextSolution) {
                 try {
-                    Thread.sleep(1000); //TODO: Config?
+                    Thread.sleep(Integer.parseInt(
+                            Config.getValue("ProcessorSleepTime", "1000")));
                 } catch (InterruptedException ex) {
                     Logger.getLogger(SolutionProcessor.class.getName()).log(Level.SEVERE, null, ex);
                 }
