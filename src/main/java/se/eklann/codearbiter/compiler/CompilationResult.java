@@ -1,4 +1,4 @@
-package se.eklann.codearbiter.model;
+package se.eklann.codearbiter.compiler;
 
 /**
  *

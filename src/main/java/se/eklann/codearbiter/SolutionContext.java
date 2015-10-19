@@ -6,7 +6,7 @@ import se.eklann.codearbiter.compiler.CompilerFactory;
 import se.eklann.codearbiter.executor.ContainerBuilder;
 import se.eklann.codearbiter.executor.ContainerBuilderFactory;
 import se.eklann.codearbiter.executor.Executor;
-import se.eklann.codearbiter.model.CompilationResult;
+import se.eklann.codearbiter.compiler.CompilationResult;
 import se.eklann.codearbiter.model.ExecutionResult;
 import se.eklann.codearbiter.model.IOPair;
 import se.eklann.codearbiter.model.Solution;
@@ -43,7 +43,8 @@ public class SolutionContext {
     public void Compile() {
         CompilationResult result = compiler.Compile(
                 solution.getSourceCode(), executableFilename);
-        solution.setCompilationResult(result);
+        solution.setCompilationSuccess(result.isSuccess());
+        solution.setCompilationMessage(result.getMessage());
     }
     
     public void Run() {

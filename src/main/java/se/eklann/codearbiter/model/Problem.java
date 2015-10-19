@@ -1,6 +1,7 @@
 package se.eklann.codearbiter.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,13 @@ public class Problem implements Serializable {
     @JoinColumn(name = "problemId")
     private List<IOPair> testCases;
 
+    @OneToMany
+    @JoinColumn(name = "problemId")
+    private List<Solution> solutions;
+        
     public Problem() {
+        testCases = new ArrayList<>();
+        solutions = new ArrayList<>();
     }
     
     public long getId() {
@@ -76,5 +83,13 @@ public class Problem implements Serializable {
 
     public void setTestCases(List<IOPair> testCases) {
         this.testCases = testCases;
+    }
+
+    public List<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setSolutions(List<Solution> solutions) {
+        this.solutions = solutions;
     }
 }

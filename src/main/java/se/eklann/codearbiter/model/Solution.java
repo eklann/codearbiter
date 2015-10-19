@@ -2,12 +2,14 @@ package se.eklann.codearbiter.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,21 +53,15 @@ public class Solution implements Serializable {
     @Column
     private String compilationMessage;
     
-    @Column
-    private int executionTimeMs;
+    @OneToMany
+    @JoinColumn(name = "solutionId")
+    private List<ExecutionResult> executionResults;
 
-    @Column
-    private boolean executionAborted;
-    
-    @Column
-    private String executionOutput;
-    
-    @Column
-    private int executionExitCode;
-
-    public Solution() {
+    public Solution(Problem problem, User user) {
+        this.problem = problem;
+        this.user = user;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -122,15 +118,6 @@ public class Solution implements Serializable {
         this.status = status;
     }
 
-    public CompilationResult getCompilationResult() {
-        return new CompilationResult(compilationSuccess, compilationMessage);
-    }
-    
-    public void setCompilationResult(CompilationResult result) {
-        compilationSuccess = result.isSuccess();
-        compilationMessage = result.getMessage();
-    }
-    
     public boolean isCompilationSuccess() {
         return compilationSuccess;
     }
@@ -147,47 +134,13 @@ public class Solution implements Serializable {
         this.compilationMessage = compilationMessage;
     }
 
-    public ExecutionResult getExecutionResult() {
-        return new ExecutionResult(executionTimeMs, executionAborted, 
-                executionOutput, executionExitCode);
-    }
-    
-    public void setExecutionResult(ExecutionResult result) {
-        executionTimeMs = result.getExecutionTimeMs();
-        executionAborted = result.isWasAborted();
-        executionOutput = result.getActualOutput();
-        executionExitCode = result.getExitCode();
-    }
-    
-    public int getExecutionTimeMs() {
-        return executionTimeMs;
+    public List<ExecutionResult> getExecutionResults() {
+        return executionResults;
     }
 
-    public void setExecutionTimeMs(int executionTimeMs) {
-        this.executionTimeMs = executionTimeMs;
+    public void setExecutionResults(List<ExecutionResult> executionResults) {
+        this.executionResults = executionResults;
     }
 
-    public boolean isExecutionAborted() {
-        return executionAborted;
-    }
 
-    public void setExecutionAborted(boolean executionAborted) {
-        this.executionAborted = executionAborted;
-    }
-
-    public String getExecutionOutput() {
-        return executionOutput;
-    }
-
-    public void setExecutionOutput(String executionOutput) {
-        this.executionOutput = executionOutput;
-    }
-
-    public int getExecutionExitCode() {
-        return executionExitCode;
-    }
-
-    public void setExecutionExitCode(int executionExitCode) {
-        this.executionExitCode = executionExitCode;
-    }
 }

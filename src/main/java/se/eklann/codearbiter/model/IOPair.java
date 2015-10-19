@@ -1,12 +1,15 @@
 package se.eklann.codearbiter.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +28,10 @@ public class IOPair implements Serializable {
     @JoinColumn(name = "problemId")
     private Problem problem;
     
+    @OneToMany
+    @JoinColumn(name = "solutionId")
+    private List<ExecutionResult> executionResults;
+        
     @Column
     private String input;
     
@@ -37,9 +44,34 @@ public class IOPair implements Serializable {
     //TODO: Support special execution times for specific languages
     
     public IOPair(String input, String expectedOutput, int maximumExecutionTimeMs) {
+        executionResults = new ArrayList<>();
         this.input = input;
         this.expectedOutput = expectedOutput;
         this.maximumExecutionTimeMs = maximumExecutionTimeMs;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Problem getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+
+    public List<ExecutionResult> getExecutionResults() {
+        return executionResults;
+    }
+
+    public void setExecutionResults(List<ExecutionResult> executionResults) {
+        this.executionResults = executionResults;
     }
 
     public String getInput() {

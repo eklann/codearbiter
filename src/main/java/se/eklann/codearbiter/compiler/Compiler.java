@@ -1,7 +1,5 @@
 package se.eklann.codearbiter.compiler;
 
-import se.eklann.codearbiter.model.CompilationResult;
-
 /**
  *
  * @author eklann
