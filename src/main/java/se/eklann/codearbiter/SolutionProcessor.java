@@ -4,6 +4,8 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import se.eklann.codearbiter.arbiter.ArbiterFactory;
+import se.eklann.codearbiter.arbiter.CodeGolfArbiter;
 import se.eklann.codearbiter.model.EvaluationStatus;
 import se.eklann.codearbiter.model.Solution;
 
@@ -62,7 +64,8 @@ public class SolutionProcessor implements Runnable {
             context.Compile();
             
             if (solution.isCompilationSuccess()) {
-                context.Run();
+                context.Run(ArbiterFactory.getArbiter(
+                        solution.getProblem().getArbiterType()));
             }
             
             solution.setStatus(EvaluationStatus.Evaluated);

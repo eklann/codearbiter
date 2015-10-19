@@ -1,6 +1,5 @@
 package se.eklann.codearbiter.executor;
 
-import se.eklann.codearbiter.model.ExecutionResult;
 import se.eklann.codearbiter.model.IOPair;
 
 /**

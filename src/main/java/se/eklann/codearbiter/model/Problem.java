@@ -30,6 +30,9 @@ public class Problem implements Serializable {
     private String description;
     
     @Column
+    private ArbiterType arbiterType;
+    
+    @Column
     private int unsolvedScore;
     
     @OneToMany
@@ -67,6 +70,14 @@ public class Problem implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ArbiterType getArbiterType() {
+        return arbiterType;
+    }
+
+    public void setArbiterType(ArbiterType arbiterType) {
+        this.arbiterType = arbiterType;
     }
 
     public int getUnsolvedScore() {

@@ -30,7 +30,7 @@ public class IOPair implements Serializable {
     
     @OneToMany
     @JoinColumn(name = "solutionId")
-    private List<ExecutionResult> executionResults;
+    private List<IOPairSolution> executionResults;
         
     @Column
     private String input;
@@ -66,11 +66,11 @@ public class IOPair implements Serializable {
         this.problem = problem;
     }
 
-    public List<ExecutionResult> getExecutionResults() {
+    public List<IOPairSolution> getExecutionResults() {
         return executionResults;
     }
 
-    public void setExecutionResults(List<ExecutionResult> executionResults) {
+    public void setExecutionResults(List<IOPairSolution> executionResults) {
         this.executionResults = executionResults;
     }
 

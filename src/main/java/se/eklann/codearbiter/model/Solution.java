@@ -53,12 +53,15 @@ public class Solution implements Serializable {
     @Column
     private String compilationMessage;
     
+    @Column 
+    private boolean valid;
+    
     @Column
     private int baseScore;
     
     @OneToMany
     @JoinColumn(name = "solutionId")
-    private List<ExecutionResult> executionResults;
+    private List<IOPairSolution> executionResults;
 
     public Solution(Problem problem, User user) {
         this.problem = problem;
@@ -137,6 +140,14 @@ public class Solution implements Serializable {
         this.compilationMessage = compilationMessage;
     }
 
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
     public int getBaseScore() {
         return baseScore;
     }
@@ -145,11 +156,11 @@ public class Solution implements Serializable {
         this.baseScore = baseScore;
     }
 
-    public List<ExecutionResult> getExecutionResults() {
+    public List<IOPairSolution> getExecutionResults() {
         return executionResults;
     }
 
-    public void setExecutionResults(List<ExecutionResult> executionResults) {
+    public void setExecutionResults(List<IOPairSolution> executionResults) {
         this.executionResults = executionResults;
     }
 

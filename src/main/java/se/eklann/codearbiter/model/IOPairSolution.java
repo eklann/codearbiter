@@ -14,11 +14,11 @@ import javax.persistence.Table;
  * @author eklann
  */
 @Entity
-@Table(name = "IOPair")
-public class ExecutionResult implements Serializable {
+@Table(name = "IOPairSolution")
+public class IOPairSolution implements Serializable {
     @Id
     @GeneratedValue
-    @Column(name = "executionResultId")
+    @Column(name = "iopairSolutionId")
     private long id;
     
     @ManyToOne(optional = false)
@@ -44,7 +44,7 @@ public class ExecutionResult implements Serializable {
     @Column
     private int bonusScore;
 
-    public ExecutionResult(Solution solution, IOPair ioPair) {
+    public IOPairSolution(Solution solution, IOPair ioPair) {
         this.solution = solution;
         this.ioPair = ioPair;
     }
